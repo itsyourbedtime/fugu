@@ -80,20 +80,23 @@ local function simplecopy(obj)
 end
 
 local function save_project(num)
+  if util.file_exists(_path.dust .. "fugu/data") == false then
+    util.make_dir(_path.dust .. "fugu/data")
+  end
   data[pattern].bpm = params:get("bpm")
   data.last_pattern = pattern
   data.mode = mode
-  tab.save(data,"/home/we/dust/data/bedtime/fugu-pat-"..num ..".data")
-  params:write("bedtime/fugu-param-"..num ..".pset")
+  tab.save(data,_path.dust .. "fugu/data/fugu-pat-"..num ..".data")
+  params:write(_path.dust .. "fugu/data/fugu-param-"..num ..".pset")
 end
 
 local function load_project(num)
-  saved_data = tab.load("/home/we/dust/data/bedtime/fugu-pat-"..num ..".data")
+  saved_data = tab.load(_path.dust .. "fugu/data/fugu-pat-"..num ..".data")
   if saved_data ~= nil then
     data = saved_data
     pattern = data.last_pattern
     if data.mode ~= nil then mode = data.mode end
-    params:read("bedtime/fugu-param-"..num  .. ".pset")
+    params:read(_path.dust .. "fugu/data/fugu-param-"..num ..".pset")
     params:set("bpm", data[pattern].bpm) -- load bpm
   else
     print("no file")
