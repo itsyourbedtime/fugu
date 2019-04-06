@@ -26,7 +26,7 @@
 
 
 engine.name = "MollyThePoly"
-local Molly = require '/molly_the_poly/lib/molly_the_poly_engine'
+local Molly = require 'molly_the_poly/lib/molly_the_poly_engine'
 local music = require 'musicutil'
 local beatclock = require 'beatclock'
 local tab = require 'tabutil'
